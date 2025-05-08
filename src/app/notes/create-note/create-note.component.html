@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-center">
+    <div class="card">
+      <div class="card-header text-white bg-primary mb-3">Add a Note</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="noteTitle" class="form-label">Note Title</label>
+          <input type="text" class="form-control" id="noteTitle" [(ngModel)]="title" />
+        </div>
+        <div class="mb-3">
+          <label for="noteDescription" class="form-label">Description</label>
+          <textarea class="form-control" id="noteDescription" rows="3" [(ngModel)]="description"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="notePriority" class="form-label">Priority</label>
+          <select id="notePriority" class="form-select" [(ngModel)]="priority">
+            <option value="High">High</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary float-end" (click)="noteCreation()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

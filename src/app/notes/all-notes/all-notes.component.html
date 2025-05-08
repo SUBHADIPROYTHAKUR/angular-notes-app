@@ -1,0 +1,212 @@
+<!-- Main container with spacing -->
+<div class="container-lg mt-5">
+  <div class="d-flex justify-content-center flex-wrap">
+
+    <!-- Loop through all notes -->
+    <div
+      class="card mx-3 my-3"
+      [ngClass]="{
+        'border-danger': note.priority === 'High',
+        'border-warning': note.priority === 'Medium',
+        'border-success': note.priority === 'Low'
+      }"
+      style="width: 18rem;"
+      *ngFor="let note of notes | async"
+    >
+      <!-- Note content -->
+      <div class="card-body">
+        <!-- Note title -->
+        <h5 class="card-title">{{ note.title }}</h5>
+
+        <!-- Note date -->
+        <h6 class="card-subtitle mb-2 text-muted">
+          {{ note.date | date: 'fullDate' }}
+        </h6>
+
+        <!-- Note description -->
+        <p>{{ note.description }}</p>
+
+        <!-- Note priority badge -->
+        <div class="mt-3">
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-danger': note.priority === 'High',
+              'bg-warning text-dark': note.priority === 'Medium',
+              'bg-success': note.priority === 'Low'
+            }"
+          >
+            Priority: {{ note.priority }}
+          </span>
+        </div>
+
+        <!-- Show shared users (only for the note owner) -->
+        <div *ngIf="note.authorId === currentUserId && note.collaborators?.length > 0" class="mt-3">
+          <span class="badge bg-primary text-white">Shared with:</span>
+          <ul class="list-unstyled mt-2">
+            <li *ngFor="let collaborator of note.collaborators">
+              <i class="fas fa-user"></i> {{ collaborator }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Show note's original author (only for collaborators) -->
+        <div *ngIf="note.authorId !== currentUserId" class="mt-3">
+          <span class="badge bg-success text-white">Shared by:</span>
+          <p class="mt-2">
+            <i class="fas fa-user"></i> {{ note.authorName || 'Unknown' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Note action buttons -->
+      <div class="card-footer">
+        <div class="float-end d-flex">
+          <!-- Edit button -->
+          <button
+            class="btn btn-primary mx-1"
+            (click)="getNoteToBeEdited(note.id)"
+            data-bs-toggle="modal"
+            data-bs-target="#editNoteModal"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+
+          <!-- Delete button -->
+          <button class="btn btn-danger mx-1" (click)="noteDeleting(note.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+
+          <!-- Add collaborator button (only for owner) -->
+          <button
+            *ngIf="note.authorId === currentUserId"
+            class="btn btn-secondary mx-1"
+            (click)="openShareModal(note.id)"
+            data-bs-toggle="modal"
+            data-bs-target="#shareNoteModal"
+          >
+            <i class="fas fa-user-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Edit Note Modal ================= -->
+<div
+  class="modal fade"
+  id="editNoteModal"
+  tabindex="-1"
+  aria-labelledby="editNoteModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit a Note</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Note title input -->
+        <div class="mb-3">
+          <label class="form-label">Note Title</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="GotNoteForUpdate.title"
+          />
+        </div>
+
+        <!-- Description input -->
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            rows="3"
+            [(ngModel)]="GotNoteForUpdate.description"
+          ></textarea>
+        </div>
+
+        <!-- Priority dropdown -->
+        <div class="mb-3">
+          <label class="form-label">Priority</label>
+          <select
+            class="form-select"
+            [(ngModel)]="GotNoteForUpdate.priority"
+          >
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Modal actions -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="noteUpdating()"
+          data-bs-dismiss="modal"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============== Share Collaborator Modal =============== -->
+<div
+  class="modal fade"
+  id="shareNoteModal"
+  tabindex="-1"
+  aria-labelledby="shareNoteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Collaborator</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Email input for collaborator -->
+      <div class="modal-body">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email"
+          [(ngModel)]="collaboratorEmail"
+        />
+      </div>
+
+      <!-- Modal actions -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addCollaborator()"
+          data-bs-dismiss="modal"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

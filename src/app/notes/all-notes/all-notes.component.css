@@ -1,0 +1,49 @@
+.fas {
+  font-size: 20px;
+}
+
+.border-danger {
+  border: 2px solid #dc3545 !important; /* Red for High priority */
+}
+
+.border-warning {
+  border: 2px solid #ffc107 !important; /* Yellow for Medium priority */
+}
+
+.border-success {
+  border: 2px solid #28a745 !important; /* Green for Low priority */
+}
+
+.badge {
+  font-size: 12px;
+  margin-top: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important; /* Red for High priority */
+}
+
+.bg-warning {
+  background-color: #ffc107 !important; /* Yellow for Medium priority */
+}
+
+.bg-success {
+  background-color: #28a745 !important; /* Green for Low priority */
+}
+
+.text-dark {
+  color: #000 !important; /* Dark text for Medium priority */
+}
+
+.list-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-unstyled li {
+  font-size: 14px;
+  margin-top: 5px;
+}
