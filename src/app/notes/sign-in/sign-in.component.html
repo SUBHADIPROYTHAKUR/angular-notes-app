@@ -1,43 +1,33 @@
-<div class="d-flex justify-content-center">
-  <div class="card">
-    <div class="card-header text-white bg-primary text-center">
-      {{ isSignUp ? 'Create an Account' : 'Sign in to Your Account' }}
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-custom flex-column">
+  <div class="card glass-card shadow-lg border-0">
+    <div class="card-header text-white text-center gradient-header rounded-top py-3">
+      <h5 class="mb-0">{{ isSignUp ? 'Create an Account' : 'Kindly Login/SignUp to add new Notes and Tasks!!' }}</h5>
     </div>
     <div class="card-body d-flex flex-column align-items-center">
 
       <!-- Sign In Form -->
-      <form *ngIf="!isSignUp" [formGroup]="signInForm" (ngSubmit)="loginWithEmail()" class="w-100 px-3">
-        <input class="form-control mb-2" type="email" formControlName="email" placeholder="Email" required />
-        <input class="form-control mb-2" type="password" formControlName="password" placeholder="Password" required />
-        <button class="btn btn-success w-100 mb-2" type="submit">Login</button>
+      <form *ngIf="!isSignUp" [formGroup]="signInForm" (ngSubmit)="loginWithEmail()" class="w-100 px-4">
+        <input class="form-control soft-input mb-3" type="email" formControlName="email" placeholder="Email" required />
+        <input class="form-control soft-input mb-3" type="password" formControlName="password" placeholder="Password" required />
+        <button class="btn btn-primary neon-btn w-100 mb-3" type="submit">Login</button>
       </form>
 
       <!-- Sign Up Form -->
-      <form *ngIf="isSignUp" [formGroup]="signUpForm" (ngSubmit)="registerWithEmail()" class="w-100 px-3">
-        <input class="form-control mb-2" type="email" formControlName="email" placeholder="Email" required />
-        <input class="form-control mb-2" type="password" formControlName="password" placeholder="Password" required />
-        <button class="btn btn-primary w-100 mb-2" type="submit">Sign Up</button>
+      <form *ngIf="isSignUp" [formGroup]="signUpForm" (ngSubmit)="registerWithEmail()" class="w-100 px-4">
+        <input class="form-control soft-input mb-3" type="email" formControlName="email" placeholder="Email" required />
+        <input class="form-control soft-input mb-3" type="password" formControlName="password" placeholder="Password" required />
+        <button class="btn btn-success neon-btn w-100 mb-3" type="submit">Sign Up</button>
       </form>
 
-      <hr class="w-100" />
+      <div class="divider w-100 my-3 text-center text-muted">or</div>
 
-      <!-- G Icon + Google Login Button -->
-      <div class="d-flex align-items-center gap-2 mb-2">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-          alt="G Logo"
-          width="30"
-          height="30"
-        />
-        <button class="login-btn btn btn-outline-dark d-flex align-items-center" (click)="auth.loginGoogle()" role="button">
-          <img width="20" style="margin-bottom:3px; margin-right:5px"
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
-          Sign in with Google
-        </button>
-      </div>
+      <!-- Google Login Button -->
+      <button class="btn google-btn w-75 mb-3" (click)="auth.loginGoogle()">
+        Sign in with Google
+      </button>
 
-      <!-- Toggle Login/Register -->
-      <small class="text-muted mt-3" (click)="toggleForm()" style="cursor: pointer;">
+      <!-- Toggle -->
+      <small class="text-muted mt-2" (click)="toggleForm()" style="cursor: pointer;">
         {{ isSignUp ? 'Already have an account? Login' : "Don't have an account? Sign up" }}
       </small>
 
@@ -48,4 +38,9 @@
 
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="mt-4 text-center text-muted">
+    &copy;  Roy & Das (Pvt.ltd). All rights reserved.
+  </footer>
 </div>

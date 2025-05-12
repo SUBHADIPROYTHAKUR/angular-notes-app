@@ -1,8 +1,46 @@
-.card {
-  width: 700px;
-  font-size: 20px;
+.bg-notebook {
+  background-color: #fdf6ec;
 }
 
-.card-header {
-  font-size: 20px;
+.note-card {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.note-header {
+  background: linear-gradient(to right, #ffa69e, #861657);
+  font-weight: bold;
+}
+
+.soft-input {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  color: #333;
+  padding: 10px;
+  transition: box-shadow 0.2s ease;
+}
+
+.soft-input:focus {
+  box-shadow: 0 0 5px #d895c2;
+  border-color: #c08497;
+  outline: none;
+}
+
+.neon-btn {
+  background-color: #6a0572;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+}
+
+.neon-btn:hover {
+  background-color: #f67280;
+  box-shadow: 0 0 12px rgba(246, 114, 128, 0.6);
+  transform: scale(1.02);
 }

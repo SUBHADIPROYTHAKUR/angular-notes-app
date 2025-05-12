@@ -1,49 +1,112 @@
-.fas {
-  font-size: 20px;
+body {
+  background-color: #fdf6ec;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.border-danger {
-  border: 2px solid #dc3545 !important; /* Red for High priority */
+.card {
+  border-radius: 16px;
+  background-color: #fffdfc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
 }
 
-.border-warning {
-  border: 2px solid #ffc107 !important; /* Yellow for Medium priority */
+.card:hover {
+  transform: scale(1.01);
 }
 
-.border-success {
-  border: 2px solid #28a745 !important; /* Green for Low priority */
+.card-title {
+  font-weight: 600;
+  color: #3d3d3d;
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #6a0572;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #93329e;
+}
+
+.btn-danger {
+  background-color: #ff6b6b;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #e55050;
+}
+
+.btn-secondary {
+  background-color: #a0c4ff;
+  border: none;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #90b3e0;
 }
 
 .badge {
-  font-size: 12px;
-  margin-top: 5px;
-  padding: 5px 10px;
-  border-radius: 5px;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 12px;
 }
 
 .bg-danger {
-  background-color: #dc3545 !important; /* Red for High priority */
+  background-color: #ff6b6b !important;
 }
 
 .bg-warning {
-  background-color: #ffc107 !important; /* Yellow for Medium priority */
+  background-color: #ffd166 !important;
+  color: #5c5c5c !important;
 }
 
 .bg-success {
-  background-color: #28a745 !important; /* Green for Low priority */
+  background-color: #06d6a0 !important;
 }
 
-.text-dark {
-  color: #000 !important; /* Dark text for Medium priority */
+.bg-primary {
+  background-color: #6c63ff !important;
 }
 
-.list-unstyled {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.modal-content {
+  border-radius: 16px;
 }
 
-.list-unstyled li {
-  font-size: 14px;
-  margin-top: 5px;
+.modal-header {
+  background: linear-gradient(to right, #ffa69e, #861657);
+  color: white;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.modal-footer .btn-primary {
+  background-color: #6a0572;
+}
+
+input.form-control,
+textarea.form-control,
+select.form-select {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fefefe;
+  padding: 10px;
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-select:focus {
+  box-shadow: 0 0 4px #c08497;
+  border-color: #c08497;
+  outline: none;
 }

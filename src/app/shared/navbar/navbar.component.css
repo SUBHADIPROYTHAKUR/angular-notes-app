@@ -1,34 +1,33 @@
+.navbar {
+  border-radius: 0;
+}
+
 .navbar-brand {
-  font-size: 25px;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
+
 .nav-link {
-  font-size: 19px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 8px 12px;
 }
 
-@media only screen and (max-width: 767px) {
-  .cou {
-    padding-top: 50px;
-  }
-  .nav-item {
-    margin: 10px;
-  }
-  .nav-link {
-    font-size: 25px;
-    padding-left: 20px;
-  }
-  .user-down {
-    background-color: black;
-    border-radius: 2rem;
-  }
-  .dropdown-toggle {
-    width: fit-content;
-    padding-right: 20px;
-  }
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
-  .nav-link:hover {
-  }
+.dropdown-menu {
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .dropdown-item {
-    font-size: 18px;
-  }
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.router-link-active {
+  background-color: #ffdab9;
+  border-radius: 8px;
 }

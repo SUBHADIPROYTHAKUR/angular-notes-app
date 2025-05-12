@@ -91,7 +91,7 @@ export class AuthService {
   sendPasswordResetEmail(email: string) {
     return this.afAuth.sendPasswordResetEmail(email)
       .then(() => {
-        alert('Un lien de réinitialisation a été envoyé à votre email.');
+        alert('A reset link has been sent to your email.');
       })
       .catch((error) => {
         alert('Erreur : ' + error.message);

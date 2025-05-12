@@ -8,6 +8,9 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+filterNotes(arg0: string) {
+throw new Error('Method not implemented.');
+}
   userAvatar: string = '';
   userName: string = '';
 

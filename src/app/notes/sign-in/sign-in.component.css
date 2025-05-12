@@ -1,20 +1,42 @@
-.card {
-  margin: 100px auto;
-  width: 400px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+.bg-custom {
+  background-color: #fdf6ec; /* soft paper */
+  min-height: 100vh;
 }
 
-.login-btn {
-  margin-top: 10px;
+.gradient-header {
+  background: linear-gradient(to right, #ffa69e, #861657); /* cozy header */
+  font-weight: bold;
+}
+
+.glass-card {
   width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.7); /* frosted card */
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  color: #333;
 }
 
-input {
-  padding: 0.75rem;
+.soft-input {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ddd;
+  color: #333;
 }
 
-@media (max-width: 767px) {
-  .card {
-    width: 90%;
-  }
+.soft-input::placeholder {
+  color: #999;
+}
+
+.neon-btn {
+  background-color: #6a0572;
+  color: white;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.neon-btn:hover {
+  background-color: #f67280;
+  box-shadow: 0 0 10px rgba(246, 114, 128, 0.6);
+  transform: scale(1.03);
 }

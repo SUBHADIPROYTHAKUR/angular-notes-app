@@ -13,6 +13,7 @@ export class SignInComponent implements OnInit {
   signInForm!: FormGroup;
   signUpForm!: FormGroup;
   isSignUp = false; // toggle form
+currentYear: any;
 
   constructor(
     public auth: AuthService,
