@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter, switchMap } from 'rxjs/operators';
 import { Note } from '../note';
 import { NoteService } from '../note.service';
 import { AuthService } from 'src/app/core/auth.service';
@@ -12,7 +12,9 @@ import { AuthService } from 'src/app/core/auth.service';
   styleUrls: ['./all-notes.component.css'],
 })
 export class AllNotesComponent implements OnInit {
-  notes: Observable<Note[]>; // Changed to Observable<Note[]>
+  notes: Observable<Note[]>;
+  searchTerm: string = '';
+  priorityFilter: string = 'All';
   GotNoteForUpdate: Note = {} as Note;
   IdOfNoteToBeUpdated: string;
 
@@ -32,11 +34,26 @@ export class AllNotesComponent implements OnInit {
         const authoredNotes$ = this.notesService.getAllNotes(userEmail);
         const sharedNotes$ = this.notesService.getSharedNotes(userEmail);
 
-        this.notes = combineLatest([authoredNotes$, sharedNotes$]).pipe(
+        const allNotes$ = combineLatest([authoredNotes$, sharedNotes$]).pipe(
           map(([authoredNotes, sharedNotes]) => {
             console.log('Authored Notes:', authoredNotes);
             console.log('Shared Notes:', sharedNotes);
             return [...authoredNotes, ...sharedNotes];
+          })
+        );
+
+        this.notes = combineLatest([allNotes$, this.notesService.searchQuery$, this.notesService.priorityFilter$]).pipe(
+          map(([allNotes, searchTerm, priorityFilter]) => {
+            let filteredNotes = allNotes;
+            if (searchTerm) {
+              filteredNotes = filteredNotes.filter(note =>
+                note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                note.description.toLowerCase().includes(searchTerm.toLowerCase())
+              );
+            }
+            if (priorityFilter !== 'All') {
+              filteredNotes = filteredNotes.filter(note => note.priority === priorityFilter);
+            }            return filteredNotes;
           })
         );
       } else {
@@ -89,6 +106,14 @@ export class AllNotesComponent implements OnInit {
   updatePriority(noteId: string, priority: string) {
     this.notesService.updateNote(noteId, { priority });
     console.log(`Priority updated for note ${noteId} to ${priority}`);
+  }
+
+  applySearchFilter() {
+    this.notesService.updateSearchQuery(this.searchTerm);
+  }
+
+  applyPriorityFilter(priority: string) {
+    this.notesService.updatePriorityFilter(priority);
   }
 }
 

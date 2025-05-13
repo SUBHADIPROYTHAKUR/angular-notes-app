@@ -6,6 +6,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Note } from './note';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -18,6 +19,12 @@ export class NoteService {
   notesCollection: AngularFirestoreCollection<Note>;
   notesDocument: AngularFirestoreDocument<Note>;
   userData = '';
+
+  private searchQuerySubject = new BehaviorSubject<string>('');
+  searchQuery$: Observable<string> = this.searchQuerySubject.asObservable();
+
+  private priorityFilterSubject = new BehaviorSubject<string>('All');
+  priorityFilter$: Observable<string> = this.priorityFilterSubject.asObservable();
 
   constructor(
     private afs: AngularFirestore,
@@ -87,7 +94,7 @@ export class NoteService {
         )
       );
   }
-  
+
   addCollaborator(noteId: string, email: string) {
     const normalizedEmail = email.trim().toLowerCase();
     console.log('Adding collaborator:', { noteId, normalizedEmail });
@@ -117,5 +124,13 @@ export class NoteService {
 
   deleteNote(id: string) {
     this.getNote(id).delete();
+  }
+
+  updateSearchQuery(query: string) {
+    this.searchQuerySubject.next(query);
+  }
+
+  updatePriorityFilter(priority: string | null) {
+ this.priorityFilterSubject.next(priority);
   }
 }

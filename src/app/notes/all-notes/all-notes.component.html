@@ -1,5 +1,26 @@
 <!-- Main container with spacing -->
 <div class="container-lg mt-5">
+  <!-- Search and filter section -->
+  <div class="mb-4">
+    <!-- Search bar -->
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search notes..."
+        aria-label="Search notes"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="applySearchFilter()"
+      />
+    </div>
+    <!-- Priority filter buttons -->
+    <div class="d-flex justify-content-center flex-wrap">
+      <button class="btn btn-outline-primary mx-1 mb-2" (click)="applyPriorityFilter('All')">All</button>
+      <button class="btn btn-outline-danger mx-1 mb-2" (click)="applyPriorityFilter('High')">High Priority</button>
+      <button class="btn btn-outline-warning mx-1 mb-2" (click)="applyPriorityFilter('Medium')">Medium Priority</button>
+      <button class="btn btn-outline-success mx-1 mb-2" (click)="applyPriorityFilter('Low')">Low Priority</button>
+    </div>
+  </div>
   <div class="d-flex justify-content-center flex-wrap">
 
     <!-- Loop through all notes -->
